@@ -7,4 +7,5 @@ public interface Author {
     String getPageTitle();
     String getRequestAttribute();
     public String getHomePageName();
+    String getLastModifiedBy();
 }

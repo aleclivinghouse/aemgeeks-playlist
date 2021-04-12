@@ -1,6 +1,7 @@
 package com.aem.geeks.core.models.impl;
 
 import com.aem.geeks.core.models.Author;
+import com.day.cq.search.QueryBuilder;
 import com.day.cq.wcm.api.Page;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -31,6 +32,9 @@ public class AuthorImpl implements Author {
     @Self
     SlingHttpServletRequest slingHttpServletRequest;
 
+    @OSGiService
+    QueryBuilder queryBuilder;
+
     @RequestAttribute(name = "rAttribute")
     private String reqAttribute;
 
@@ -39,6 +43,11 @@ public class AuthorImpl implements Author {
 
     @ScriptVariable
     Page currentPage;
+
+    @Inject
+    @Via("resource")
+    @Named("jcr:lastModifiedBy")
+    String modifiedBy;
 
 
     @Inject
@@ -85,5 +94,14 @@ public class AuthorImpl implements Author {
     public String getHomePageName(){
         return resource.getName();
     }
+
+    @Override
+    public String getLastModifiedBy(){
+        return modifiedBy;
+    }
+
+
+
+
 
 }
