@@ -5,4 +5,6 @@ public interface Author {
     String getLastName();
     boolean getIsProfessor();
     String getPageTitle();
+    String getRequestAttribute();
+    public String getHomePageName();
 }

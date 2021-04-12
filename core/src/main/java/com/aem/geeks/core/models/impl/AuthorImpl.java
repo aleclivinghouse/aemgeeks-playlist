@@ -28,6 +28,15 @@ public class AuthorImpl implements Author {
     @SlingObject
     ResourceResolver resourceResolver;
 
+    @Self
+    SlingHttpServletRequest slingHttpServletRequest;
+
+    @RequestAttribute(name = "rAttribute")
+    private String reqAttribute;
+
+    @ResourcePath(path="/content/aemgeeks.us/en/home")@Via("resource")
+    Resource resource;
+
     @ScriptVariable
     Page currentPage;
 
@@ -65,6 +74,16 @@ public class AuthorImpl implements Author {
     @Override
     public String getPageTitle(){
         return currentPage.getTitle();
+    }
+
+    @Override
+    public String getRequestAttribute(){
+        return reqAttribute;
+    };
+
+    @Override
+    public String getHomePageName(){
+        return resource.getName();
     }
 
 }
